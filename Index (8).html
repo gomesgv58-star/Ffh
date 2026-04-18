@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFH4X VT Menu</title>
+    <style>
+        :root {
+            --primary: #ff0040;
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: #2c3e50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+        }
+
+        /* Container Principal */
+        #menu-container {
+            width: 300px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.3);
+        }
+
+        /* Cabeçalho */
+        .header {
+            background: var(--primary);
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Conteúdo e Slides */
+        .content {
+            padding: 15px;
+            display: none; /* Escondido por padrão para o sistema de abas */
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Estilo dos Botões */
+        .btn-option {
+            background: var(--bg-card);
+            border: 1px solid #333;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .btn-option:hover {
+            border-color: var(--primary);
+        }
+
+        .btn-inject {
+            background: linear-gradient(45deg, #ff0040, #ff4d00);
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Botão de Fechar/Esconder */
+        .minimize {
+            cursor: pointer;
+            background: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .tab-btn.active-tab {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div id="menu-container">
+    <div class="header">
+        <span>FFH4X VT</span>
+        <span class="minimize" onclick="toggleMenu()">_</span>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active-tab" onclick="openTab(event, 'aimbot')">Aimbot</button>
+        <button class="tab-btn" onclick="openTab(event, 'visuals')">Visual</button>
+    </div>
+
+    <div id="aimbot" class="content active">
+        <button class="btn-option">🎯 Cabeça (ON)</button>
+        <button class="btn-option">🎯 Pescoço (OFF)</button>
+        <button class="btn-option">🎯 Peito (OFF)</button>
+        <hr style="border: 0.5px solid #333;">
+        <button class="btn-inject" onclick="injecting()">INJETAR AGORA</button>
+    </div>
+
+    <div id="visuals" class="content">
+        <button class="btn-option">👁️ ESP Linha</button>
+        <button class="btn-option">👁️ ESP Box</button>
+        <button class="btn-option">👁️ Distância</button>
+    </div>
+</div>
+
+<script>
+    // Função para alternar abas
+    function openTab(evt, tabName) {
+        var i, content, tablinks;
+        content = document.getElementsByClassName("content");
+        for (i = 0; i < content.length; i++) {
+            content[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active-tab", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active-tab";
+    }
+
+    // Função para simular injeção
+    function injecting() {
+        const btn = document.querySelector('.btn-inject');
+        btn.innerHTML = "INJETANDO...";
+        btn.style.opacity = "0.7";
+        
+        setTimeout(() => {
+            alert("FFH4X VT: Injetado com sucesso!");
+            btn.innerHTML = "INJETAR AGORA";
+            btn.style.opacity = "1";
+        }, 2000);
+    }
+
+    // Função para esconder/mostrar (Minimizar)
+    function toggleMenu() {
+        const container = document.getElementById('menu-container');
+        if (container.style.height === "40px") {
+            container.style.height = "auto";
+        } else {
+            container.style.height = "40px";
+        }
+    }
+</script>
+
+</body>
+</html>
